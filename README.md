@@ -1,8 +1,9 @@
-# React + Vite
+# React simple apps
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project I created for my preparation for technical interviews. The leading technology is React JS.
 
-Currently, two official plugins are available:
+01. Counter
+02. Calculator
+03. Timer
+04. Pomodoro Timer
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
