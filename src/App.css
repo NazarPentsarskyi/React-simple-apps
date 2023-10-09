@@ -69,11 +69,6 @@ button:hover {
   border-color: var(--hover-color-a);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 .board {
   display: grid;
   grid-template-columns: repeat(3, 5em);
