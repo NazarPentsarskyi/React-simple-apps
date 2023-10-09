@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 
 const Timer = () => {
@@ -16,33 +15,31 @@ const handleStart = () => {
   if(isRunning === false) {
     setTime(time);
   }
-}
+};
 
 const handleStop = () => {
   setIsRunning(false);
-}
+};
 
 const handleReset = () => {
   setTime(0);
   setIsRunning(false);
-}
+};
 
-useEffect (() => {
-  
-  if ( isRunning === true) {
-  
+useEffect(() => {
+  if (isRunning) {
     const timeoutId = setTimeout(() => {
       setTime(prevTime => prevTime + 1);
-  }, 1000)
+    }, 1000);
 
-  return () => {
-    if(isRunning === false) {
-      clearTimeout(timeoutId);
-      setIsRunning(false);
-    }
+    return () => {
+      if(!isRunning) {
+        clearTimeout(timeoutId);
+        setIsRunning(false);
+      }
+    };
   }
-}
-},[time, isRunning])
+},[time, isRunning]);
 
   return (
     <>
@@ -50,7 +47,7 @@ useEffect (() => {
       <h2>Timer</h2>
       <br />
 
-      <h3>{time}</h3>
+      <h3>{time} seconds</h3>
       <div className='board'>
         <button onClick = {handleStart}>Start</button>
         <button onClick = {handleStop}>Stop</button>
