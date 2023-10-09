@@ -6,15 +6,8 @@ const Timer = () => {
 const [time, setTime] = useState(0);
 const [isRunning, setIsRunning] = useState(false);
 
-//const startTime = Math.floor(Date.now() / 1000);
-
 const handleStart = () => {
-  setTime(0);
   setIsRunning(true);
-  
-  if(isRunning === false) {
-    setTime(time);
-  }
 };
 
 const handleStop = () => {
@@ -27,19 +20,16 @@ const handleReset = () => {
 };
 
 useEffect(() => {
+  let timeoutId;
+
   if (isRunning) {
-    const timeoutId = setTimeout(() => {
+    timeoutId = setInterval(() => {
       setTime(prevTime => prevTime + 1);
     }, 1000);
-
-    return () => {
-      if(!isRunning) {
-        clearTimeout(timeoutId);
-        setIsRunning(false);
-      }
-    };
   }
-},[time, isRunning]);
+
+  return () => clearInterval(timeoutId);
+},[isRunning]);
 
   return (
     <>
