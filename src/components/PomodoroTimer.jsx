@@ -23,22 +23,27 @@ const PomodoroTimer = () => {
     setBreakTime(5);
   };
 
-  // const handlerActiveTime = (event) => {
-  //   setActiveTime(parseInt(event.target.value));
-  // };
+  const handlerActiveTime = (event) => {
+    setActiveTime(parseInt(event.target.value));
+  };
 
-  // const handlerDelayTime = (event) => {
-  //   setBreakTime(parseInt(event.target.value));
-  // };
+  const handlerBreakTime = (event) => {
+    setBreakTime(parseInt(event.target.value));
+  };
 
-// const handleKeyDown = (event) => {
-//   if (event.key === 'Enter') {
-//     event.preventDefault();
-//     setIsRunning(true);
-//     // setIsRunningDel(true);
-//   }
-// };
+const handleKeyDownActive = (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    setIsRunning(true);
+  }
+};
 
+const handleKeyDownBreak = (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    setIsBreak(true);
+  }
+};
   useEffect(() => {
     let intervalId;
 
@@ -68,10 +73,11 @@ const PomodoroTimer = () => {
       <button><Link to="/"> Home </Link></button>
       <h2>PomodoroTimer</h2>
       <br />
-          <h3 className={isBreak ? 'breakTime' : 'actionTime'}>{isBreak ? "Break Time" : "Work Time"}</h3>
-          <h3 className="lookTime">{formatTime(activeTime)}</h3><p>min:sec</p>
-      {/* <form>
-        <label htmlFor="active">Active time (minutes): 
+      <h3 className={isBreak ? 'breakTime' : 'actionTime'}>{isBreak ? "Break Time" : "Work Time"}</h3>
+      <h3 className="lookTime">{formatTime(activeTime)}</h3><p>min:sec</p>
+      
+      <form className="formTimer">
+        <label htmlFor="active">Active : 
           <input
             type="number"
             id="active"
@@ -79,21 +85,22 @@ const PomodoroTimer = () => {
             value = {activeTime}
             onChange={handlerActiveTime}
             placeholder="active time"
-            // onKeyDown={handleKeyDown}
+            onKeyDown={handleKeyDownActive}
           />
         </label>
-        <label htmlFor="delay">Delay time (minutes): 
+        <label htmlFor="break">Break : 
           <input
             type="number"
-            id="delay"
-            name="delay"
+            id="break"
+            name="break"
             value = {breakTime}
-            onChange={handlerDelayTime}
-            placeholder="delay time"
-            // onKeyDown={handleKeyDown}
+            onChange={handlerBreakTime}
+            placeholder="break time"
+            onKeyDown={handleKeyDownBreak}
           />
         </label>
-      </form> */}
+      </form>
+      
       <div className="board">
         <button onClick={handleStart}>Start</button>
         <button onClick={handlePause}>Pause</button>

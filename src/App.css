@@ -119,6 +119,17 @@ p{
   /* color: var(--main-color); */
 }
 
+.formTimer {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+} 
+
+input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .error {
   display: grid;
   width: 1020px;
