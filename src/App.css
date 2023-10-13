@@ -9,6 +9,7 @@
   --bg-color: #282828;
   --button-color: #1a1a1a;
   --hover-color-a:#535bf2;
+  --break-color:#a31c1c;
 
   color-scheme: light dark;
   color: var(--root-color);
@@ -92,9 +93,30 @@ input {
   font-size: 1.5em;
 }
 
+.actionTime {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--main-color);
+}
+
+.breakTime {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--break-color);
+}
+
 .lookTime {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+p{
+  font-size: 1.25rem;
+  /* color: var(--main-color); */
 }
 
 .error {

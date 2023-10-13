@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 
 const PomodoroTimer = () => {
 
-  const [activeTime, setActiveTime] = useState(1);
-  const [delayTime, setDelayTime] = useState(1);
-  const [timer, setTimer] = useState(activeTime * 60);
+  const [activeTime, setActiveTime] = useState(5);
+  const [breakTime, setBreakTime] = useState(5);
   const [isRunning, setIsRunning] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
   
   const handleStart = () => {
     setIsRunning(true);
@@ -18,16 +18,18 @@ const PomodoroTimer = () => {
 
   const handleReset = () => {
     setIsRunning(false);
-    setTimer(activeTime * 60);
+    setIsBreak(false);
+    setActiveTime(5);
+    setBreakTime(5);
   };
 
-  const handlerActiveTime = (event) => {
-    setActiveTime(parseInt(event.target.value));
-  };
+  // const handlerActiveTime = (event) => {
+  //   setActiveTime(parseInt(event.target.value));
+  // };
 
-  const handlerDelayTime = (event) => {
-    setDelayTime(parseInt(event.target.value));
-  };
+  // const handlerDelayTime = (event) => {
+  //   setBreakTime(parseInt(event.target.value));
+  // };
 
 // const handleKeyDown = (event) => {
 //   if (event.key === 'Enter') {
@@ -39,40 +41,36 @@ const PomodoroTimer = () => {
 
   useEffect(() => {
     let intervalId;
-    
-    if (isRunning && timer > 0) {
+
+    if (isRunning && activeTime > 0) {
       intervalId = setInterval(() => {
-        setTimer(prevTime => prevTime - 1);
+        setActiveTime(prevTime => prevTime - 1);
       }, 1000);
+    } else if (isRunning && activeTime === 0 && !isBreak) {
+      setIsBreak(true);
+      setActiveTime(breakTime);
+    } else if (isRunning && activeTime === 0 && isBreak) {
+      setIsBreak(false);
+      setActiveTime(5);
     }
   
-    return () => {
-      clearInterval(intervalId);
-    }    
-  },[isRunning, timer]);
+    return () => clearInterval(intervalId);
+  },[isRunning, activeTime, isBreak, breakTime]);
 
-  const formatTime = time => {
+  const formatTime = (time) => {
     const minutes = Math.floor(time / 60).toString().padStart(2, '0');
     const seconds = (time % 60).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
-  }
+  };
 
   return (
     <>
       <button><Link to="/"> Home </Link></button>
       <h2>PomodoroTimer</h2>
       <br />
-      <div className="lookTime">
-        <div>
-          <h3>{isRunning ? "Running" : "Pause"}</h3>
-          <h3>{formatTime(timer)} min:sec</h3>
-        </div>
-        <div>
-          <h3>{isRunning ? "Running" : "Pause"}</h3>
-          <h3>{formatTime(timer)} min:sec</h3>
-        </div>
-      </div>
-      <form>
+          <h3 className={isBreak ? 'breakTime' : 'actionTime'}>{isBreak ? "Break Time" : "Work Time"}</h3>
+          <h3 className="lookTime">{formatTime(activeTime)}</h3><p>min:sec</p>
+      {/* <form>
         <label htmlFor="active">Active time (minutes): 
           <input
             type="number"
@@ -89,13 +87,13 @@ const PomodoroTimer = () => {
             type="number"
             id="delay"
             name="delay"
-            value = {delayTime}
+            value = {breakTime}
             onChange={handlerDelayTime}
             placeholder="delay time"
             // onKeyDown={handleKeyDown}
           />
         </label>
-      </form>
+      </form> */}
       <div className="board">
         <button onClick={handleStart}>Start</button>
         <button onClick={handlePause}>Pause</button>
@@ -105,4 +103,4 @@ const PomodoroTimer = () => {
   )
 };
 
-export default PomodoroTimer
+export default PomodoroTimer;
