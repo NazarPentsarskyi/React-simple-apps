@@ -2,12 +2,13 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const PomodoroTimer = () => {
-
-  const [activeTime, setActiveTime] = useState(5);
-  const [breakTime, setBreakTime] = useState(5);
+  const [activeTime, setActiveTime] = useState(1500);
+  const [breakTime, setBreakTime] = useState(300);
   const [isRunning, setIsRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-  
+  const [initialActiveTime, setInitialActiveTime] = useState(1500);
+  const [initialBreakTime, setInitialBreakTime] = useState(300);
+
   const handleStart = () => {
     setIsRunning(true);
   };
@@ -19,31 +20,32 @@ const PomodoroTimer = () => {
   const handleReset = () => {
     setIsRunning(false);
     setIsBreak(false);
-    setActiveTime(5);
-    setBreakTime(5);
+    setActiveTime(initialActiveTime);
+    setBreakTime(initialBreakTime);
   };
 
   const handlerActiveTime = (event) => {
-    setActiveTime(parseInt(event.target.value));
+    setInitialActiveTime(parseInt(event.target.value));
   };
 
   const handlerBreakTime = (event) => {
-    setBreakTime(parseInt(event.target.value));
+    setInitialBreakTime(parseInt(event.target.value));
   };
 
-const handleKeyDownActive = (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    setIsRunning(true);
-  }
-};
+  const handleKeyDownActive = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setIsRunning(true);
+    }
+  };
 
-const handleKeyDownBreak = (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    setIsBreak(true);
-  }
-};
+  const handleKeyDownBreak = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setIsBreak(true);
+    }
+  };
+
   useEffect(() => {
     let intervalId;
 
@@ -56,11 +58,11 @@ const handleKeyDownBreak = (event) => {
       setActiveTime(breakTime);
     } else if (isRunning && activeTime === 0 && isBreak) {
       setIsBreak(false);
-      setActiveTime(5);
+      setActiveTime(initialActiveTime);
     }
-  
+
     return () => clearInterval(intervalId);
-  },[isRunning, activeTime, isBreak, breakTime]);
+  }, [isRunning, activeTime, isBreak, breakTime, initialActiveTime]);
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60).toString().padStart(2, '0');
@@ -75,38 +77,38 @@ const handleKeyDownBreak = (event) => {
       <br />
       <h3 className={isBreak ? 'breakTime' : 'actionTime'}>{isBreak ? "Break Time" : "Work Time"}</h3>
       <h3 className="lookTime">{formatTime(activeTime)}</h3><p>min:sec</p>
-      
+
       <form className="formTimer">
-        <label htmlFor="active">Active : 
+        <label htmlFor="active">Active :
           <input
             type="number"
             id="active"
             name="active"
-            value = {activeTime}
+            value={initialActiveTime}
             onChange={handlerActiveTime}
             placeholder="active time"
             onKeyDown={handleKeyDownActive}
           />
         </label>
-        <label htmlFor="break">Break : 
+        <label htmlFor="break">Break :
           <input
             type="number"
             id="break"
             name="break"
-            value = {breakTime}
+            value={initialBreakTime}
             onChange={handlerBreakTime}
             placeholder="break time"
             onKeyDown={handleKeyDownBreak}
           />
         </label>
       </form>
-      
+
       <div className="board">
         <button onClick={handleStart}>Start</button>
         <button onClick={handlePause}>Pause</button>
         <button onClick={handleReset}>Reset</button>
       </div>
-    </> 
+    </>
   )
 };
 
