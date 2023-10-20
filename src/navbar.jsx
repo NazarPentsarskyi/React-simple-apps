@@ -9,6 +9,7 @@ export const Navbar = () => {
         <div className='link'><Link to="/calculator"> 02. Calculator</Link></div>
         <div className='link'><Link to="/timer"> 03. Timer</Link></div>
         <div className='link'><Link to="/pomodorotimer"> 04. Pomodoro Timer</Link></div>
+        <div className='link'><Link to="/tictactoe"> 05. Tic Tac Toe</Link></div>
     </div>
   )
 }

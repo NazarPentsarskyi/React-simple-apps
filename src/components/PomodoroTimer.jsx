@@ -73,7 +73,7 @@ const PomodoroTimer = () => {
   return (
     <>
       <button><Link to="/"> Home </Link></button>
-      <h2>PomodoroTimer</h2>
+      <h2>Pomodoro Timer</h2>
       <br />
       <h3 className={isBreak ? 'breakTime' : 'actionTime'}>{isBreak ? "Break Time" : "Work Time"}</h3>
       <h3 className="lookTime">{formatTime(activeTime)}</h3><p>min:sec</p>

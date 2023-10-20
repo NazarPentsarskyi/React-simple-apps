@@ -4,6 +4,7 @@ import Counter from './components/Counter';
 import Calculator from './components/Calculator';
 import Timer from './components/Timer';
 import PomodoroTimer from './components/PomodoroTimer';
+import TicTacToe from "./components/TicTacToe";
 import { ErrorPage } from "./ErrorPage";
 
 import './App.css';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/timer" element={<Timer />} />
           <Route path="/pomodorotimer" element={<PomodoroTimer />} />
+          <Route path="/tictactoe" element={<TicTacToe />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>     
