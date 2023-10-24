@@ -3,35 +3,61 @@ import { Link } from "react-router-dom";
 
 const Calculator = () => {
 
+  const [operand, setOperand] = useState('');
+  const [operator, setOperator] = useState('');
   const [result, setResult] = useState('');
 
-  const handleClick = (event) => {
+  const handleOperand = (event) => {
+    if (result === 'Error') {
+      setResult('');
+    }
         
-    if (event.target.name === '.' && result.includes('.')) {
+    if (event.target.name === '.' && operand.includes('.')) {
       return;
     }
   
-    if (event.target.name === '0' && result === '0') {
+    if (event.target.name === '0' && operand === '0') {
       return;
     }
 
-    setResult(result.concat(event.target.name));
+    setOperand(operand + event.target.name);
+  };
+
+  const handleOperator = (event) => {
+    if (operand !== '') {
+      setOperator(event.target.name);
+      setResult(operand);
+      setOperand('');
+    }
   };
 
   const handleReset = () => {
+    setOperand('');
+    setOperator('');
     setResult('');
   };
 
   const handleBack = () => {
+    if (operand !== '') {
+      setOperand(operand.slice(0, -1));
+    } else if (operator !== '') {
+      setOperator('');
+    } else{
     setResult(result.slice(0, -1));
+    }
   };
 
   const handleCalculate = () => {
-    try {
-      setResult(eval(result).toString());
-    }
-    catch (error) {
-      setResult('Error');
+    if (operand !== '' && operator !== '') {
+      let calc = eval(result + operator + operand);
+      try {
+        setResult(operand.includes('.') ? calc.toFixed(3).toString() : calc.toString());
+        setOperand('');
+        setOperator('');
+      }
+      catch (error) {
+        setResult('Error');
+      }
     }
   };
 
@@ -45,28 +71,28 @@ const Calculator = () => {
             type="text"
             id="calculatorDisplay"
             name="calculatorDisplay"
-            value={result}
+            value={result + operator + operand}
             disabled
           />
         </label>
         </form>
       <div className="boardCalculator">
-        <button name = '7' onClick={handleClick}>7</button>
-        <button name = '8' onClick={handleClick}>8</button>
-        <button name = '9' onClick={handleClick}>9</button>
-        <button name = '/' onClick={handleClick} className="highlight">/</button>
-        <button name = '4' onClick={handleClick}>4</button>
-        <button name = '5' onClick={handleClick}>5</button>
-        <button name = '6' onClick={handleClick}>6</button>
-        <button name = '*' onClick={handleClick} className="highlight">*</button>
-        <button name = '1' onClick={handleClick}>1</button>
-        <button name = '2' onClick={handleClick}>2</button>
-        <button name = '3' onClick={handleClick}>3</button>
-        <button name = '-' onClick={handleClick}className="highlight">-</button>
+        <button name = '7' onClick={handleOperand}>7</button>
+        <button name = '8' onClick={handleOperand}>8</button>
+        <button name = '9' onClick={handleOperand}>9</button>
+        <button name = '/' onClick={handleOperator} className="highlight">/</button>
+        <button name = '4' onClick={handleOperand}>4</button>
+        <button name = '5' onClick={handleOperand}>5</button>
+        <button name = '6' onClick={handleOperand}>6</button>
+        <button name = '*' onClick={handleOperator} className="highlight">*</button>
+        <button name = '1' onClick={handleOperand}>1</button>
+        <button name = '2' onClick={handleOperand}>2</button>
+        <button name = '3' onClick={handleOperand}>3</button>
+        <button name = '-' onClick={handleOperator}className="highlight">-</button>
         <button className="highlight" onClick={handleBack}>C</button>
-        <button name = '0' onClick={handleClick}>0</button>
-        <button name = '.' onClick={handleClick}className="highlight">.</button>
-        <button name = '+' onClick={handleClick}className="highlight">+</button>
+        <button name = '0' onClick={handleOperand}>0</button>
+        <button name = '.' onClick={handleOperand}className="highlight">.</button>
+        <button name = '+' onClick={handleOperator}className="highlight">+</button>
         <button className="highlight" onClick={handleReset}>Clear</button>
         <button className="equal highlight" onClick={handleCalculate}>=</button>
       </div>
