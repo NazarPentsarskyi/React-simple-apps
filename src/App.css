@@ -11,6 +11,7 @@
   --hover-color-a:#535bf2;
   --break-color:#a31c1c;
   --highlight-color:#282dc396;
+  --strike-color:#fd3b00c0;
 
   color-scheme: light dark;
   color: var(--root-color);
@@ -160,6 +161,68 @@ p{
   border-color: var(--main-color);
   text-align: right;
   letter-spacing: 1px;
+}
+
+.winner {
+  padding-left: 0.5em;
+  font-size: 1.4em;
+  color: var(--strike-color);
+}
+
+.reset {
+  width: 50%;
+  height: 80px;
+  color: var(--main-color);
+  margin-top: 0.7em;
+  font-size: 1.4em;
+}
+
+.strike {
+  position: absolute;
+  background-color: var(--strike-color);
+}
+
+.strike-row-1 {
+  width: 100%;
+  height: 4px;
+  top: 15.5%;
+}
+.strike-row-2 {
+  width: 100%;
+  height: 4px;
+  top: 49.5%;
+}
+.strike-row-3 {
+  width: 100%;
+  height: 4px;
+  top: 83%;
+}
+.strike-column-1 {
+  height: 100%;
+  width: 4px;
+  left: 15.5%;
+}
+.strike-column-2 {
+  height: 100%;
+  width: 4px;
+  left: 49.45%;
+}
+.strike-column-3 {
+  height: 100%;
+  width: 4px;
+  left: 83.3%;
+}
+.strike-diagonal-1 {
+  width: 100%;
+  height: 4px;
+  top: 50%;
+  transform: skewY(45deg);
+}
+.strike-diagonal-2 {
+  width: 100%;
+  height: 4px;
+  top: 50%;
+  transform: skewY(-45deg);
 }
 
 
