@@ -225,6 +225,47 @@ p{
   transform: skewY(-45deg);
 }
 
+.todolist {
+  display: grid;
+  gap: 1.5em;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+}
+
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.todoli {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px var(--highlight-color) solid;
+  border-radius: 15px;
+  font-size: 1.2rem;
+}
+
+.todoli button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: var(--strike-color);
+}
+
+.formTodolist input {
+  padding: 15px;
+  margin: 0.7em;
+  margin-left: 0;
+  width: 300px;
+  font-size: 1.6em;
+  border-radius: 10px;
+  border-color: var(--main-color);
+  letter-spacing: 1px;
+}
 
 .error {
   display: grid;

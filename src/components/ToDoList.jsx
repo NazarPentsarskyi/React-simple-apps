@@ -19,34 +19,49 @@ const ToDoList= () => {
     }
   };
 
+  const handleToDoRemove = (removedKey) => {
+    const updateToDoList = whatToDo.filter((item) => item.key != removedKey);
+    setWhatToDo(updateToDoList);
+
+  };
+
   const handleInputValue = (event) => {
     setInputValue(event.target.value)
   };
-
 
   return (
     <>
       <button><Link to="/"> Home </Link></button>
       <h2>To do list</h2>
       <br />
-      <form>
-        <label htmlFor="toDo">
+      <div className="todolist">
+        <form className="formTodolist">
           <input
-            name="toDo"
-            id="toDo"
-            value = {inputValue}
-            onChange={handleInputValue}
-            onKeyDown={handleToDoWrite} />
-          <button onClick={handleToDoWrite}>ok</button>
-        </label>
-      </form>
-      <ol>
-        {whatToDo.map((item) => <li key = {item.key}>
-          {item.text}
-        </li>)}
-      </ol>
+          value = {inputValue}
+          onChange={handleInputValue}
+          onKeyDown={handleToDoWrite} 
+          />
+          <button
+          onClick={handleToDoWrite}>
+            add
+          </button>
+        </form>
+        <ol>
+          {whatToDo.map((item) => (
+            <li 
+            className="todoli"
+            key = {item.key}>
+              {item.text}
+              <button 
+              onClick={() => handleToDoRemove(item.key)}>
+                X
+              </button>
+            </li>
+          ))}
+        </ol>
+      </div>
     </>
-  )
+  );
 };
 
 export default ToDoList;
